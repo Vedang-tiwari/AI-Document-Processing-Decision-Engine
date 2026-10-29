@@ -1,0 +1,47 @@
+[
+  {
+    "id": "eval_01_valid_standard",
+    "filename": "valid_acme_invoice.pdf",
+    "expected_classification": "invoice",
+    "expected_extraction": {
+      "supplier_name": "Acme Global Supplies",
+      "invoice_number": "INV-2026-001",
+      "invoice_date": "2026-10-20",
+      "currency": "INR",
+      "subtotal": "20000.00",
+      "tax_amount": "3600.00",
+      "total_amount": "23600.00"
+    },
+    "expected_decision": "auto_eligible"
+  },
+  {
+    "id": "eval_02_high_amount_review",
+    "filename": "high_amount_review_invoice.pdf",
+    "expected_classification": "invoice",
+    "expected_extraction": {
+      "supplier_name": "TechFlow Solutions",
+      "invoice_number": "INV-2026-002",
+      "invoice_date": "2026-10-22",
+      "currency": "INR",
+      "subtotal": "40000.00",
+      "tax_amount": "7200.00",
+      "total_amount": "47200.00"
+    },
+    "expected_decision": "review_required"
+  },
+  {
+    "id": "eval_03_arithmetic_error",
+    "filename": "arithmetic_error_invoice.pdf",
+    "expected_classification": "invoice",
+    "expected_extraction": {
+      "supplier_name": "Unknown Freelancer",
+      "invoice_number": "INV-2026-003",
+      "invoice_date": "2026-10-25",
+      "currency": "INR",
+      "subtotal": "10000.00",
+      "tax_amount": "1000.00",
+      "total_amount": "15000.00"
+    },
+    "expected_decision": "review_required"
+  }
+]
