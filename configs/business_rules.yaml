@@ -1,0 +1,67 @@
+rules:
+  - rule_code: "REQUIRED_FIELDS_PRESENT"
+    name: "Required Fields Present"
+    description: "Ensures mandatory invoice fields (supplier name, invoice number, invoice date, currency, total amount) are present."
+    document_type: "invoice"
+    severity: "critical"
+    enabled: true
+    version: 1
+    configuration:
+      required_fields:
+        - "supplier.name"
+        - "invoice_number"
+        - "invoice_date"
+        - "currency"
+        - "total_amount"
+
+  - rule_code: "INVOICE_TOTAL_RECONCILIATION"
+    name: "Invoice Total Reconciliation"
+    description: "Validates that subtotal and tax sum up to total_amount within configured tolerance."
+    document_type: "invoice"
+    severity: "high"
+    enabled: true
+    version: 1
+    configuration:
+      amount_tolerance: "1.00"
+
+  - rule_code: "VENDOR_EXISTS"
+    name: "Registered Vendor Verification"
+    description: "Checks whether the supplier is recognized in the vendor registry."
+    document_type: "invoice"
+    severity: "high"
+    enabled: true
+    version: 1
+    configuration:
+      require_active: true
+
+  - rule_code: "DUPLICATE_INVOICE_CHECK"
+    name: "Duplicate Invoice Detection"
+    description: "Prevents duplicate invoice numbers from the same supplier."
+    document_type: "invoice"
+    severity: "critical"
+    enabled: true
+    version: 1
+    configuration:
+      block_duplicate: true
+
+  - rule_code: "MAX_AUTO_APPROVAL_AMOUNT"
+    name: "Maximum Automatic Amount Limit"
+    description: "Documents exceeding the limit must be routed to human review."
+    document_type: "invoice"
+    severity: "medium"
+    enabled: true
+    version: 1
+    configuration:
+      max_amount: "25000.00"
+      currency: "INR"
+
+  - rule_code: "PURCHASE_ORDER_MATCH"
+    name: "Purchase Order Matching"
+    description: "Validates invoice amount against referenced purchase order."
+    document_type: "invoice"
+    severity: "high"
+    enabled: true
+    version: 1
+    configuration:
+      require_po_when_present: true
+      amount_tolerance: "5.00"
