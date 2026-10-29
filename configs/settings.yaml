@@ -1,0 +1,24 @@
+confidence:
+  automatic_processing_threshold: 0.90
+  review_threshold: 0.70
+
+processing:
+  maximum_attempts: 3
+  retry_backoff_seconds:
+    - 5
+    - 30
+    - 120
+
+documents:
+  maximum_file_size_mb: 20
+  supported_types:
+    - application/pdf
+    - image/png
+    - image/jpeg
+
+invoice:
+  require_vendor_match: true
+  require_purchase_order_match: false
+  maximum_automatic_amount: "25000.00"
+  currency: "INR"
+  amount_tolerance: "1.00"
